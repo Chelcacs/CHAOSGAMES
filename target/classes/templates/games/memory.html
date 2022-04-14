@@ -1,0 +1,113 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Memory Testing</title>
+    <link rel="icon" href="/images/logoes/logoi1.ico" type="image/x-icon"/>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <link rel="stylesheet prefetch" href="/onlinegames/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/onlinegames/style.css">
+    <link rel="stylesheet" href="/onlinegames/app.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/headerself.css">
+    <link rel="stylesheet" href="/onlinegames/clock.css">
+    <style type="text/css">
+        .ball {
+            width: 200px;
+            height: 200px;
+            background-color: hsl(223,90%,55%);
+            color: #FFFFFF;
+            font-size: 36px;
+            line-height: 200px;
+            text-align: center;
+            border-radius: 50%;
+            font-family: "Arial Black";
+            margin-top: 50px;
+            margin-left: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="p-y-80">
+        <div class="container-fluid">
+            <div>
+                <h2  align="center" style="margin-bottom: 10px; margin-top: 10px">Memory Testing</h2>
+            </div>
+            <div class="row" style="max-width: 2280px">
+                <div class="col-lg-3 col-md-3" style="padding-right: 0px">
+                    <div class="clock">
+                        <span class="clock__digit" style="width: 90px;color:hsl(140.9, 79.6%, 59.6%)">Time:</span>
+                        <span class="clock__digit" id="hour" style="width: 40px;">00</span>
+                        <span class="clock__digit">:</span>
+                        <span class="clock__digit" id="min" style="width: 40px;">00</span>
+                        <span class="clock__digit">:</span>
+                        <span class="clock__digit" id="sec" style="width: 40px;">00</span>
+                    </div>
+                    <div class="ball">
+                        <span class="clock__digit" style="width: 100px; margin-left: -35px; color:hsl(140.9, 79.6%, 59.6%)">Click:</span>
+                        <span class="moves clock__digit" style="width: 30px; margin-left: 10px">0</span>
+                    </div>
+                    <div>
+                        <table border="1" id="tableshow">
+                            <caption th:text="${username}" style="caption-side: top"></caption>
+                            <tr>
+                                <td>No.</td>
+                                <td>Time</td>
+                                <td>Click</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-md-6" style="padding-left: 0px; padding-right: 0px">
+                    <ul class="deck" id="deck"></ul>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-2 offset-md-1" style="padding-left: 0px; margin-left: 50px">
+                    <div class="container">
+                        <button class="button green" style="margin-bottom: 10px" data-filter-color="rgba(71, 255, 111, 0.4)"  onclick="refresh()"><span>刷新</span></button>
+                    </div>
+                    <div class="container">
+                        <button id="sbtn1" class="button"  style="margin-bottom: 10px" onclick="start()"><span id="sbtn2">开始</span></button>
+                    </div>
+                    <div class="container">
+                        <button class="button animated" data-filter-color="#00a1ff57" onclick="download()"><span>导出</span></button>
+                    </div>
+                    <a href='' id="dd" style="display: none"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="/onlinegames/script.js"></script>
+    <script src="/onlinegames/jquery.min.js"></script>
+    <script src="/onlinegames/clock.js"></script>
+    <script src="/onlinegames/app.js"></script>
+    <script type="text/javascript">
+        function download(){
+            var html = "<html><head><meta charset='utf-8' /></head><body>" + document.getElementsByTagName("table")[0].outerHTML + "</body></html>";
+            // 实例化一个Blob对象，其构造函数的第一个参数是包含文件内容的数组，第二个参数是包含文件类型属性的对象
+            var blob = new Blob([html], { type: "application/vnd.ms-excel" });
+            var a = document.getElementById("dd");
+            // 利用URL.createObjectURL()方法为a元素生成blob URL
+            a.href = URL.createObjectURL(blob);
+            // 设置文件名
+            a.download = "测试记录.xls";
+            $("#dd")[0].click();
+        }
+    </script>
+    <!-- partial -->
+
+
+
+
+
+</body>
+</html>

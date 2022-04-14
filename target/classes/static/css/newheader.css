@@ -1,0 +1,85 @@
+.btn-primary,
+.btn-primary:active{
+    color: #ffffff;
+    background-color: #5b04de;
+    border-color: #5b04de;
+}
+.btn-primary:focus,
+.btn-primary:hover,
+.show > .btn-primary.dropdown-toggle,
+.show > .btn-primary.dropdown-toggle:hover,
+.show > .btn-primary.dropdown-toggle:focus{
+    color: #ffffff;
+    background-color: #772ce8;
+    border-color: #772ce8;
+}
+
+li > a, #header .nav > ul > li > a{
+    color: #b1b1b1;
+    font-size: 16px;
+}
+li > a:hover, #header .nav > ul > li > a:hover{
+    color: #ffffff;
+}
+#header .nav > ul > li > ul > li a{
+    color: #b1b1b1;
+    font-size: 15px;
+}
+#header .nav > ul > li > ul > li a:hover{
+    color: #ffffff;
+}
+
+.dropdown-menu .dropdown-item:focus, .dropdown-menu .dropdown-item:hover {
+    color: #ffffff;
+    background-color: #242629;
+}
+/*badge改变*/
+.toolbar ul.toolbar-nav li a{
+    position: relative;
+    color: #242629;
+}
+/*数字两位数*/
+.badge-primary{
+    background-color: #e91916;
+    position: absolute;
+    padding: 5px;
+    top: 12px;
+    right: -10px;
+    font-weight: bold;
+    height: 20px;
+    text-align: center;
+}
+/*数字小于10*/
+.badge-primary-sn{
+    background-color: #e91916;
+    position: absolute;
+    padding: 0px;
+    top: 12px;
+    right: -10px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+/*profile页下标题栏*/
+
+.btn-secondary{
+    color: #242629;
+}
+.btn-secondary:hover{
+    color: #242629;
+    background-color: #ffffff;
+}
+
+/*登录注册等input标签focus时的border颜色*/
+#login-reg .login-reg-main form input:focus{
+    outline: 1px solid #00FADF;
+    background-color: #4609c3;
+}
+/*container最大尺寸*/
+.container{
+    max-width: 2080px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}

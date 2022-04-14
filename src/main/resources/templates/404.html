@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>404|CHAOSGAMES</title>
+    <link rel="icon" href="/images/logoes/logoi1.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/images/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/begamcss/fontawesome.min.css">
+    <link rel="stylesheet" href="/begamcss/slick.css">
+    <link rel="stylesheet" href="/begamcss/nice-select.css">
+    <link rel="stylesheet" href="/begamcss/magnific-popup.css">
+    <link rel="stylesheet" href="/begamcss/animate.css">
+
+
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/animate/animate.min.css">
+    <!-- plugins css -->
+    <link href="/plugins/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">
+    <!-- theme css -->
+    <link rel="stylesheet" href="/css/theme.min.css">
+    <link rel="stylesheet" href="/begamcss/style.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/newheader.css">
+</head>
+
+<body>
+
+    <!-- start preloader -->
+    <div class="preloader" id="preloader"></div>
+    <!-- end preloader -->
+
+<!--    <a href="#" class="scrollToTop"><i class="fas fa-angle-double-up"></i></a>-->
+
+    <!-- header-section start -->
+    <header id="header">
+        <div th:replace="header::header"></div>
+    </header>
+    <!-- header-section end -->
+
+    <!-- About Us In start -->
+    <section id="about-us-section">
+        <div class="overlay pt-120">
+            <div class="container wow fadeInUp">
+                <div class="main-container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="section-header text-center">
+                                <h2 class="title">Developing...</h2>
+                                <p>CHAOSGAMES is a platform for those people who are game players. CHAOSGAMES is an immersive online gaming experience for all Esports fans out there. Doesn’t matter if you’re a new gamer, casual player, an amateur pro or a registered professional, if you’re passionate about playing and competing in the hottest tournaments, CHAOSGAMES has what you need.</p>
+                                <p>Our team is made up of only one guy, welcome to join me! email:huchaoshengtkd@gmail.com OR WeChat:L864469261</p>
+                                <a href="/index" class="cmn-btn">Understand</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Us In end -->
+
+    <!-- footer-section start -->
+    <footer id="footer">
+        <div th:replace="footer::footer"></div>
+    </footer>
+    <!-- footer-section end -->
+
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/slick.js"></script>
+    <script src="/js/jquery.nice-select.min.js"></script>
+    <script src="/js/fontawesome.js"></script>
+    <script src="/js/countdown.jquery.js"></script>
+    <script src="/js/jquery.counterup.min.js"></script>
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/wow.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/theme.min.js"></script>
+
+    <!-- vendor js -->
+    <script src="/plugins/popper/popper.min.js"></script>
+
+    <!-- plugins js -->
+    <script src="/plugins/lightbox/lightbox.js"></script>
+    <script src="/plugins/owl-carousel/js/owl.carousel.min.js"></script>
+    <script>
+        (function($) {
+            "use strict";
+
+
+            $('.owl-slide').owlCarousel({
+                nav: true,
+                loop: true,
+                autoplay: true,
+                items: 1
+            });
+
+
+            $('.owl-list').owlCarousel({
+                margin: 25,
+                nav: true,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    500: {
+                        items: 2
+                    },
+                    701: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                }
+            });
+
+
+            $('[data-lightbox]').lightbox();
+        })(jQuery);
+    </script>
+
+    <!-- theme js -->
+    <script th:inline="javascript">
+        var logstate = [[${logstate}]];
+        if(logstate==1){
+            document.getElementById("no").style.display="none";
+            document.getElementById("yes").style.display="";
+        }else{
+            document.getElementById("yes").style.display="none";
+        }
+    </script>
+
+</body>
+
+</html>

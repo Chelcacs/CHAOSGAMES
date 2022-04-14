@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.gary.dao.TUserUserDao">
+
+    <!--用xml把java刚写的那个实体类，再用xml写一次、再一次重组数据的机会-->
+    <select id="find" resultType="cn.gary.models.TUserUser">
+        select * from T_user
+    </select>
+
+    <select id="findPage" resultType="cn.gary.models.TUserUser">
+        select * from T_user limit #{offset}, #{length}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(1) from T_user
+    </select>
+
+    <select id="login" resultType="java.lang.Integer">
+        select count(1) from T_user where user_name = #{username} and user_pwd = #{userpwd}
+    </select>
+
+    <select id="findbyemail" resultType="cn.gary.models.TUserUser" parameterType="java.lang.String">
+        select * from T_user where user_email = #{email}
+    </select>
+
+    <select id="findById" resultType="cn.gary.models.TUserUser" parameterType="java.lang.Integer">
+        select * from T_user where user_id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="findbyusername" resultType="cn.gary.models.TUserUser" parameterType="java.lang.String">
+        select * from T_user where user_name = #{username}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+		delete from T_user where user_id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="cn.gary.models.TUserUser">
+		insert into T_user(user_id, user_name, user_pwd, user_email, user_paid, user_phnum, user_birthday)
+		values(#{user_id}, #{user_name}, #{user_pwd}, #{user_email}, #{user_paid}, #{user_phnum}, #{user_birthday})
+    </insert>
+
+    <update id="resetpwd" parameterType="java.lang.String">
+        update T_user set user_pwd = #{newpwd} where user_name= #{username}
+    </update>
+
+    <select id="signup" resultType="java.lang.Integer">
+        select count(1) from T_user where user_name = #{username}
+    </select>
+
+    <select id="emailexist" resultType="java.lang.Integer">
+        select count(1) from T_user where user_email = #{email}
+    </select>
+
+    <update id="update" parameterType="cn.gary.models.TUserUser">
+		update T_user
+		set user_pwd = #{user_pwd},
+		    user_email = #{user_email},
+            user_paid = #{user_paid},
+            user_phnum = #{user_phnum},
+            user_birthday = #{user_birthday},
+		    user_birthday = #{user_birthday},
+		    user_avatar = #{user_avatar},
+		    friend_num = #{friend_num}
+		where user_name = #{user_name}
+    </update>
+<!--    <update id="resetPwd">-->
+<!--        update T_User_User set UserPwd=#{newPwd} where UserName=#{username}-->
+<!--    </update>-->
+
+</mapper>

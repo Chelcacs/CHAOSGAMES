@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up|CHAOSGAMES</title>
+
+    <link rel="icon" href="/images/logoes/logoi1.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="/begamcss/bootstrap.min.css">
+    <link rel="stylesheet" href="/begamcss/fontawesome.min.css">
+    <link rel="stylesheet" href="/begamcss/slick.css">
+    <link rel="stylesheet" href="/begamcss/nice-select.css">
+    <link rel="stylesheet" href="/begamcss/animate.css">
+    <link rel="stylesheet" href="/begamcss/style.css">
+</head>
+
+<body>
+
+    <!-- start preloader -->
+    <div class="preloader" id="preloader"></div>
+    <!-- end preloader -->
+
+    <!-- Login Reg In start -->
+    <section id="login-reg">
+        <div class="overlay pb-120" style="padding-bottom: 10px">
+            <div class="container">
+                <div class="top-area" style="margin-top: 10px">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-sm-5 col">
+                            <a href="index">
+                                <img src="/images/logoes/logot4.png" alt="image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-120 d-flex justify-content-center" style="padding-top: 10px">
+                    <div class="col-lg-6">
+                        <div class="login-reg-main text-center">
+                            <h4>Let's Get Started</h4>
+                            <div class="form-area">
+                                <form autocomplete="off" action="register" method="post">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input placeholder="Enter your email" type="email" name="email" th:value="${email}">
+                                    </div>
+                                    <div class="form-group" id="val_code" style="display: none">
+                                        <label>Verification Code</label>
+                                        <input placeholder="Enter your code" type="text" name="code">
+                                    </div>
+                                    <p>
+                                        <span th:text="${senderror}" style="color:#da4f49;"></span>
+                                        <span th:text="${sendsuccess}" style="color:#05FF67;"></span>
+                                        <span th:text="${verifyerror}" style="color:#da4f49;"></span>
+
+                                    </p>
+                                    <div class="form-group">
+                                        <button name="bt" value="bt1" id="next" type="submit" class="cmn-btn">Continue</button>
+                                        <button name="bt" value="bt2" id="submit" type="submit" class="cmn-btn" style="display: none">Create Account</button>
+                                    </div>
+                                </form>
+                                <div class="or">
+                                    <p style="margin-bottom: 0px; margin-top: 0px">OR</p>
+                                </div>
+                                <div class="sign-in">
+                                    <p>Login with your</p>
+                                </div>
+                                <div class="reg-with">
+                                    <div class="social-area d-flex justify-content-center">
+                                        <a href="javascript:void(0)"><img src="images/social-icon-1.png" alt="image"></a>
+                                        <a class="twitch" href="javascript:void(0)"><img src="images/social-icon-2.png" alt="image"></a>
+                                        <a class="google" href="javascript:void(0)"><img src="images/social-icon-3.png" alt="image"></a>
+                                    </div>
+                                </div>
+                                <div class="account">
+                                    <p>Already have an account? <a href="login">Login Here</a></p>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Login Reg In end -->
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/fontawesome.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/main.js"></script>
+    <script th:inline="javascript">
+        function createaccount(){
+            var sendstate = [[${sendsuccess}]]
+            var verifystate = [[${verifyerror}]]
+                if(sendstate!=null||verifystate!=null){
+                    //send email successfully or verify unsuccessfully
+                    document.getElementById("val_code").style.display="";
+                    document.getElementById("next").style.display="none";
+                    document.getElementById("submit").style.display="";
+                }
+        }
+        createaccount();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.gary.dao.VideoRecommendListDao">
+
+    <!--用xml把java刚写的那个实体类，再用xml写一次、再一次重组数据的机会-->
+
+
+    <select id="findByVideocid" resultType="cn.gary.models.VideoRecommendList" parameterType="java.lang.String">
+        select * from video_recommend_list where video_cid = #{video_cid}
+    </select>
+
+
+
+
+
+</mapper>

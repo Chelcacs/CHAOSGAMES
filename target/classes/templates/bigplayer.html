@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title>mui-player PC端扩展插件示例</title>
+        <link rel="stylesheet" href="/videoplayer/mui-player.min.css">
+        <script th:inline="javascript">
+            var video_src = [[${record_1.video_address}]]
+            var video_cover = [[${record_1.video_cover_address}]]
+            var video_title = [[${record_1.video_title}]]
+            var playerConfig = {
+                container:'#mui-player',
+                title:video_title,
+                src:video_src,
+                poster:video_cover,
+                videoAttribute:[
+                    {attrKey:'webkit-playsinline',attrValue:''},
+                    {attrKey:'playsinline',attrValue:''},
+                    {attrKey:'x5-playsinline',attrValue:''},
+                    {attrKey:'t7-video-player-type',attrValue:'inline'},
+                    {attrKey:'x5-video-player-type',attrValue:'h5-page'},
+                    {attrKey:'x-webkit-airplay',attrValue:'allow'},
+                    {attrKey:'controlslist',attrValue:'nodownload'},
+                ],
+            }
+        </script>
+        <script src="/videoplayer/mui-player.min.js"></script>
+        <script src="/videoplayer/mui-player-desktop-plugin.min.js"></script>
+        <style type="text/css">
+            .coverbody{
+                font: 12px Roboto, Arial, sans-serif;
+                background-color: #000;
+                color: #fff;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                position: absolute;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    
+	<body class="coverbody">
+        <div id="mui-player" style="width: 100%; height: 100%;margin: auto"></div>
+    </body>
+    
+    <script th:inline="javascript">
+        var config = window.playerConfig;
+        var video_preview = [[${record_1.video_cover_address}]]
+        config.plugins = [
+            typeof MuiPlayerDesktopPlugin == 'function' ? new MuiPlayerDesktopPlugin({
+                thumbnails:{ // 缩略图配置
+                    preview:[video_preview],
+                    tile:[10,10],
+                    scale:[160,90],
+                },
+            }) : {},
+        ]
+
+        console.log(config);
+        var mp = new MuiPlayer(config);
+    </script>
+</html>

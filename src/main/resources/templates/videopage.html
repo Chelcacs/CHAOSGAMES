@@ -1,0 +1,652 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Videos|CHAOSGAMES</title>
+  <link rel="icon" href="/images/logoes/logoi1.ico" type="image/x-icon"/>
+  <!-- vendor css -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/plugins/animate/animate.min.css">
+  <!-- plugins css -->
+  <link href="/plugins/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">
+  <!-- theme css -->
+  <link rel="stylesheet" href="/css/theme.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/newheader.css">
+</head>
+<body class="fixed-header">
+  <!-- header -->
+  <header id="header">
+    <div th:replace="header::header"></div>
+  </header>
+  <!-- /header -->
+
+  <!-- main -->
+  <section class="bg-image" th:style="'background:url(' + @{${record_1.video_cover_address}} + ');'">
+    <div class="overlay"></div>
+    <div class="container">
+<!--      data-src="/bigplayer?cid=HakuJhGndkO"-->
+      <div class="video-play" th:data-src="@{'/bigplayer?cid=' + ${record_1.video_cid}}">
+        <div class="embed-responsive embed-responsive-16by9">
+          <img class="embed-responsive-item" th:src="@{${record_1.video_cover_address}}">
+          <div class="video-caption">
+            <h5 th:text="${record_1.video_title}"></h5>
+            <span class="length">5:32</span>
+          </div>
+          <div class="video-play-icon">
+            <i class="fa fa-play"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="container">
+      <h5><i class="fa fa-film"></i> Recent Videos <span>(123)</span></h5>
+      <form method="post">
+        <div class="form-group input-icon-right">
+          <i class="fa fa-search"></i>
+          <input type="text" class="form-control search-video form-control-secondary" id="search" placeholder="Search Video...">
+        </div>
+      </form>
+      <a class="btn btn-secondary m-l-10 float-left hidden-md-down" style="color: #ffffff" role="button">Filter Videos <i class="fa fa-align-right"></i></a>
+      <a id="video_upload" class="btn btn-primary btn-shadow float-right hidden-sm-down" style="color: #ffffff" role="button">Upload Video <i class="fa fa-cloud-upload"></i></a>
+      <input type="file" id="video_input" value="" accept="video/*">
+      <input type="file" id="cover_input" value="" style="display: none">
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="toolbar-custom">
+        <a class="btn btn-default btn-icon m-r-10 float-left hidden-sm-down" href="/404" data-toggle="tooltip" title="refresh" data-placement="bottom" role="button"><i class="fa fa-refresh"></i></a>
+        <div class="dropdown float-left">
+          <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">All Platform <i class="fa fa-caret-down"></i></button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item active" href="/404">All Platform</a>
+            <a class="dropdown-item" href="/404">Playstation 4</a>
+            <a class="dropdown-item" href="/404">Xbox One</a>
+            <a class="dropdown-item" href="/404">Origin</a>
+            <a class="dropdown-item" href="/404">Steam</a>
+          </div>
+        </div>
+
+        <div class="btn-group float-right m-l-5 hidden-sm-down" role="group">
+          <a class="btn btn-default btn-icon" href="/404" role="button"><i class="fa fa-th-large"></i></a>
+          <a class="btn btn-default btn-icon" href="/404" role="button"><i class="fa fa-bars"></i></a>
+        </div>
+        <div class="dropdown float-right">
+          <button class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Date Added <i class="fa fa-caret-down"></i></button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item active" href="/404">Date Added</a>
+            <a class="dropdown-item" href="/404">Popular</a>
+            <a class="dropdown-item" href="/404">Newest</a>
+            <a class="dropdown-item" href="/404">Oldest</a>
+          </div>
+        </div>
+      </div>
+      <div class="row row-5">
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+              <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+            </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+          <div class="card card-video">
+            <div class="card-img">
+              <a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}">
+                <img th:src="@{${record_videoshow_1.video_cover_address}}" alt="Tom Clancy's Ghost Recon: Wildlands">
+              </a>
+              <div class="card-meta">
+                <span>4:32</span>
+              </div>
+            </div>
+            <div class="card-block">
+              <h4 class="card-title"><a th:href="@{'/videos/watch?cid=' + ${record_videoshow_1.video_cid}}"><span th:text="${record_videoshow_1.video_title}"></span></a></h4>
+              <div class="card-meta" th:inline="text">
+                <span><i class="fa fa-clock-o"></i>[[${record_videoshow_1.video_upload_time}]]</span>
+                <span>[[${record_videoshow_1.video_access_num}]] views</span>
+              </div>
+              <!--<p th:text="${record_videoshow_1.video_description}"></p>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-results m-t-10">
+        <span>Showing 10 to 20 of 48 videos</span>
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item disabled"><a class="page-link" href="/404" aria-label="Previous"><span aria-hidden="true"><i class="fa fa-angle-left"></i></span></a></li>
+            <li class="page-item active"><a class="page-link" href="/404">1</a></li>
+            <li class="page-item"><a class="page-link" href="/404">2</a></li>
+            <li class="page-item"><a class="page-link" href="/404">3</a></li>
+            <li class="page-item"><a class="page-link" href="/404">4</a></li>
+            <li class="page-item"><a class="page-link" href="/404">5</a></li>
+            <li class="separate"><span>...</span></li>
+            <li class="page-item"><a class="page-link" href="/404">25</a></li>
+            <li class="page-item"><a class="page-link" href="/404" aria-label="Next"><span aria-hidden="true"><i class="fa fa-angle-right"></i></span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+  <!-- /main -->
+
+  <!-- footer -->
+  <footer id="footer">
+    <div th:replace="footer::footer"></div>
+  </footer>
+  <!-- /footer -->
+
+  <!-- vendor js -->
+  <script src="/plugins/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/plugins/popper/popper.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- plugins js -->
+  <script src="/plugins/lightbox/lightbox.js"></script>
+  <script src="/plugins/owl-carousel/js/owl.carousel.min.js"></script>
+  <script>
+    (function($) {
+      "use strict";
+
+
+      $('.owl-slide').owlCarousel({
+        nav: true,
+        loop: true,
+        autoplay: true,
+        items: 1
+      });
+
+
+      $('.owl-list').owlCarousel({
+        margin: 25,
+        nav: true,
+        dots: false,
+        responsive: {
+          0: {
+            items: 1
+          },
+          500: {
+            items: 2
+          },
+          701: {
+            items: 3
+          },
+          1000: {
+            items: 4
+          }
+        }
+      });
+
+
+      $('[data-lightbox]').lightbox();
+    })(jQuery);
+  </script>
+  <!-- theme js -->
+  <script src="/js/theme.min.js"></script>
+  <script th:inline="javascript">
+    var logstate = [[${logstate}]];
+    if(logstate==1){
+      document.getElementById("no").style.display="none";
+      document.getElementById("yes").style.display="";
+    }else{
+      document.getElementById("yes").style.display="none";
+    }
+  </script>
+  <!--视频上传-->
+  <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>
+  <script th:inline="javascript">
+    var logstate = [[${logstate}]];
+    $("#video_upload").click(function(){
+      if(logstate == 1){
+        const date = new Date();
+        const time = '' + date.getFullYear()+(date.getMonth()+1)+date.getDate();
+        const objename = Math.random(0,1).toFixed(4)*10000;
+        const storeAs = 'videos/videoobjects/' + time + "/" + date.getTime() + objename + '.' + 'mp4';
+        const storeAsCover = 'videos/videocovers/' + time + "/" + date.getTime() + objename + '.' + 'png';
+        var coverurl = '';
+        var client = new OSS.Wrapper({
+          region: 'oss-cn-beijing',
+          accessKeyId: 'LTAI5tE2NkC6ty6VQjMAvU2d',
+          accessKeySecret: 'ir7uV5IBEzHMx4WgX9jCFwSJzlEsXh',
+          bucket: 'chaosgames'
+        });
+        $("#video_input").click();
+        $("#video_input").change(function(){
+          console.log("change");
+          //生成封面
+          var file = $(this)[0].files[0]
+          var fileUrl = URL.createObjectURL(file);
+          var videoElement = document.createElement("VIDEO")
+          videoElement.src = fileUrl
+          videoElement.autoplay = true
+          videoElement.setAttribute('controls', 'controls');
+          videoElement.currentTime = 1;//截取当前时间，部分视频第一帧黑屏
+          videoElement.addEventListener("canplay", function (_event) {
+            var canvas = document.createElement("canvas");
+            canvas.width = videoElement.videoWidth * 0.2;
+            canvas.height = videoElement.videoHeight * 0.2;
+            canvas.getContext('2d').drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+            var img = document.createElement("img");
+            img.src = canvas.toDataURL("image/png");
+            $("#cover_input").attr("value", canvas.toDataURL("image/png"));
+          },false);
+          $("#cover_input").change(function(){
+            //上传封面到0ss对象存储服务器
+            client.multipartUpload(storeAsCover, this.files[0]).then(function(result2){
+              coverurl = result2.url;
+            });
+
+          });
+          上传视频到oss对象存储服务器
+          client.multipartUpload(storeAs, this.files[0]).then(function (result){
+            console.log(result.url);
+            $.ajax({
+              type:"post",
+              url:"/videopage",
+              data:{
+                "videoaddress":result.url,
+                "coveraddress":coverurl
+              },
+              async:true,
+              success:function(data){
+                console.log(data);//在控制台输出信息。
+              }
+            });
+          }).catch(function(err){
+            console.log(err);
+          });
+        });
+      }else{
+        window.location.href = "/login?backto=%2Fvideopage";
+      }
+    });
+
+  </script>
+
+
+</body>
+</html>

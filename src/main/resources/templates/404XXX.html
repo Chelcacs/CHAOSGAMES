@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>404 Not found</title>
+  <link rel="icon" href="/images/logoes/logoi1.ico" type="image/x-icon"/>
+  <!-- vendor css -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="plugins/animate/animate.min.css">
+  <!-- plugins css -->
+  <link href="plugins/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">
+  <!-- theme css -->
+  <link rel="stylesheet" href="css/theme.min.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <<link rel="stylesheet" href="css/newheader.css">
+</head>
+<body class="fixed-header">
+
+  <!-- header -->
+  <header id="header">
+    <div th:replace="header::header"></div>
+  </header>
+  <!-- /header -->
+
+  <!-- main -->
+  <section class="bg-image bg-image-sm error-404" style="background-image: url('https://img.youtube.com/vi/y3Cpetu4ke4/maxresdefault.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="heading">
+            <h2>404</h2>
+          </div>
+          <p>Sorry, but the page you requested could not be found.</p>
+          <form>
+            <div class="col-lg-8 mx-auto">
+              <div class="form-group input-icon-right">
+                <input type="text" class="form-control" placeholder="Search Page...">
+                <i class="fa fa-search"></i>
+              </div>
+            </div>
+          </form>
+          <div class="m-t-50">
+            <a href="index" class="btn btn-youtube btn-effect btn-shadow btn-rounded btn-lg">Back to home</a>
+            <a href="contact.html" class="btn btn-outline-default btn-rounded btn-lg m-l-10">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /main -->
+
+  <!-- footer -->
+  <footer id="footer">
+    <div th:replace="footer::footer"></div>
+  </footer>
+  <!-- /footer -->
+
+  <!-- vendor js -->
+  <script src="plugins/jquery/jquery-3.2.1.min.js"></script>
+  <script src="plugins/popper/popper.min.js"></script>
+  <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- plugins js -->
+  <script src="plugins/lightbox/lightbox.js"></script>
+  <script src="plugins/owl-carousel/js/owl.carousel.min.js"></script>
+  <script>
+    (function($) {
+      "use strict";
+
+
+      $('.owl-slide').owlCarousel({
+        nav: true,
+        loop: true,
+        autoplay: true,
+        items: 1
+      });
+
+
+      $('.owl-list').owlCarousel({
+        margin: 25,
+        nav: true,
+        dots: false,
+        responsive: {
+          0: {
+            items: 1
+          },
+          500: {
+            items: 2
+          },
+          701: {
+            items: 3
+          },
+          1000: {
+            items: 4
+          }
+        }
+      });
+
+
+      $('[data-lightbox]').lightbox();
+    })(jQuery);
+  </script>
+
+  <!-- theme js -->
+  <script src="js/theme.min.js"></script>
+  <script th:inline="javascript">
+    var logstate = [[${logstate}]];
+    if(logstate==1){
+      document.getElementById("no").style.display="none";
+      document.getElementById("yes").style.display="";
+    }else{
+      document.getElementById("yes").style.display="none";
+    }
+  </script>
+
+</body>
+</html>

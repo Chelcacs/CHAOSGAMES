@@ -1,0 +1,17 @@
+#Spring Boot 2.1 开始默认不输出url日志，需要如下调整为 TRACE 级别才会提供详细信息。
+logging:
+  level:
+    org:
+      springframework:
+        web:  trace
+        boot:
+          web:  trace
+spring:
+  mvc:
+    log-request-details: false
+    max-http-header-size: 404850000
+
+  thymeleaf:
+    prefix: classpath:/templates/
+
+

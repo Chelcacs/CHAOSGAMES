@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.gary.dao.VideoRecordDao">
+
+    <!--用xml把java刚写的那个实体类，再用xml写一次、再一次重组数据的机会-->
+
+
+    <select id="findByVideoid" resultType="cn.gary.models.VideoRecord" parameterType="java.lang.Integer">
+        select * from video_record where video_id = #{videoid,jdbcType=INTEGER}
+    </select>
+
+    <select id="findByVideocid" resultType="cn.gary.models.VideoRecord" parameterType="java.lang.String">
+        select * from video_record where video_cid = #{videocid}
+    </select>
+
+    <update id="updateVideoRecord" parameterType="cn.gary.models.VideoRecord">
+        update video_record
+        set video_cover_address = #{video_cover_address},
+            video_address = #{video_address},
+            video_author = #{video_author},
+            video_upload_time = #{video_upload_time},
+            video_access_num = #{video_access_num},
+            video_like_num = #{video_like_num},
+            video_dislike_num = #{video_dislike_num},
+            video_comment_num = #{video_dislike_num},
+            video_description = #{video_description},
+            video_title = #{video_title}
+        where video_cid = #{video_cid}
+    </update>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(1) from video_record
+    </select>
+
+    <insert id="insert" parameterType="cn.gary.models.VideoRecord">
+        insert into video_record(video_id, video_cid, video_cover_address, video_address, video_author, video_upload_time, video_access_num, video_like_num, video_title, video_description)
+        values(#{video_id}, #{video_cid}, #{video_cover_address}, #{video_address}, #{video_author}, #{video_upload_time}, #{video_access_num}, #{video_like_num}, #{video_title}, #{video_description})
+    </insert>
+
+
+
+</mapper>

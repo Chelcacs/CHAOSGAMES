@@ -1,0 +1,536 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Videos|CHAOSGAMES</title>
+  <link rel="icon" href="/images/logoes/logoi1.ico" type="image/x-icon"/>
+  <!-- vendor css -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/plugins/animate/animate.min.css">
+  <!-- plugins css -->
+  <link href="/plugins/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">
+  <!-- theme css -->
+  <link rel="stylesheet" href="/css/theme.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <!-- video play-->
+  <link rel="stylesheet" href="/videoplayer/mui-player.min.css">
+  <script th:inline="javascript">
+    var video_src = [[${record_video.video_address}]]
+    var video_cover = [[${record_video.video_cover_address}]]
+    var video_title = [[${record_video.video_title}]]
+    var playerConfig = {
+      container:'#mui-player',
+      title:video_title,
+      src:video_src,
+      poster:video_cover,
+      videoAttribute:[
+        {attrKey:'webkit-playsinline',attrValue:''},
+        {attrKey:'playsinline',attrValue:''},
+        {attrKey:'x5-playsinline',attrValue:''},
+        {attrKey:'t7-video-player-type',attrValue:'inline'},
+        {attrKey:'x5-video-player-type',attrValue:'h5-page'},
+        {attrKey:'x-webkit-airplay',attrValue:'allow'},
+        {attrKey:'controlslist',attrValue:'nodownload'},
+      ],
+    }
+  </script>
+  <script src="/videoplayer/mui-player.min.js"></script>
+  <script src="/videoplayer/mui-player-desktop-plugin.min.js"></script>
+  <link rel="stylesheet" href="/css/newheader.css">
+  <style>
+    #video-title-hidden{
+      /*标题过长隐藏*/
+      overflow:hidden;
+      text-overflow:ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      /*-webkit-line-clamp用来限制在一个块元素显示的文本的行数。 为了实现该效果，它需要组合其他的WebKit属性。常见结合属性：
+      display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
+      -webkit-box-orient 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。*/
+    }
+    #video-newspan{
+      /*推荐视频的视频播放量显示位置*/
+      position: absolute;
+      top: 10px;
+      bottom: auto;
+      left: 10px;
+      right: auto;
+      display: inline-block;
+      background-color: rgba(25,25,25,0.9);
+      border-radius: 3px;
+      font-size: 12px;
+      padding: 2px 7px;
+      color: #fff;
+      margin-top: 3px;
+    }
+     /*点赞和点踩的a标签样式覆盖（紫色->红色）*/
+    .post-meta a:hover,
+    .post-meta a:focus{
+      color: #e91916;
+    }
+    .post-meta a:not([href]){
+      color: inherit;
+    }
+  </style>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_2968977_hjyv9qw5wqn.css">
+
+</head>
+<body class="fixed-header">
+  <!-- header -->
+  <header id="header">
+    <div th:replace="header::header"></div>
+  </header>
+  <!-- /header -->
+
+  <!-- main -->
+
+  <section style="padding-top: 25px">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="container" style="margin-top: 5px; margin-bottom: 0;padding: 0px">
+            <div id="mui-player" style="width: 100%; height: 100%;margin: auto"></div>
+          </div>
+          <div class="post post-single" style="margin-top: 10px">
+              <div  th:inline="text">
+                <h2 class="post-title" style="margin-top: 5px">[[${record_video.video_title}]]</h2>
+                <div class="post-meta" style="margin: 0">
+                  <span><i class="fa fa-clock-o"></i>[[${record_video.video_upload_time}]]</span>
+                  <span><i class="iconfont icon-boshiweb_bofangliang" style="font-size: inherit"></i>[[${record_video.video_access_num}]]</span>
+                </div>
+                <div class="post-meta" style="margin: 0">
+                  <span><a id="a_like" href="javascript:void(0);" onclick="like()"><i class="iconfont icon-zan1" style="font-size: inherit"></i><span id="like" th:text="${record_video.video_like_num}"></span></a></span>
+                  <span><a id="a_dislike" href="javascript:void(0);" onclick="dislike()"><i class="iconfont icon-cai1" style="font-size: inherit"></i><span id="dislike" th:text="${record_video.video_dislike_num}"></span></a></span>
+                  <span><a href="/profilepage"><i class="iconfont icon-pinglun" style="font-size: inherit"></i><span id="comments-num" th:text="${record_video.video_dislike_num}"></span></a></span>
+                </div>
+              </div>
+
+          </div>
+          <div class="post-actions" style="margin-bottom: 10px; margin-top: 10px; padding-bottom: 10px">
+            <div class="post-tags">
+              <a href="/404">#star wars</a>
+              <a href="/404">#battlefront 2</a>
+              <a href="/404">#gameplay</a>
+              <a href="/404">#trailer</a>
+              <a href="/404">#galaxy</a>
+            </div>
+            <div class="social-share">
+              <a class="btn btn-social btn-facebook btn-circle" href="/404" data-toggle="tooltip" title="" data-placement="bottom" role="button" data-original-title="Share on facebook"><i class="fa fa-facebook"></i></a>
+              <span>5.345k</span>
+              <a class="btn btn-social btn-twitter btn-circle" href="/404" data-toggle="tooltip" title="" data-placement="bottom" role="button" data-original-title="Share on twitter"><i class="fa fa-twitter"></i></a>
+              <a class="btn btn-social btn-google-plus btn-circle" href="/404" data-toggle="tooltip" title="" data-placement="bottom" role="button" data-original-title="Share on google-plus"><i class="fa fa-google-plus"></i></a>
+            </div>
+          </div>
+          <div class="post post-single" style="margin-top: 5px">
+            <div class="post-header" style="margin-bottom: 10px">
+              <div>
+                <a href="/profilepage"><img th:src="@{${this_author.user_avatar}}" alt="/img/user/user-3.jpg" style="width: 55px;height: 55px"></a>
+              </div>
+              <div  th:inline="text">
+                <h4 style="margin-bottom: -8px">[[${this_author.user_name}]]</h4>
+                <div class="post-meta" style="margin-top: 9px">
+                  <span style="font-size: 12px"><i class="fa fa-user-o"></i>[[${this_author.friend_num}]] friends</span>
+                </div>
+              </div>
+            </div>
+            <p th:text="${record_video.video_description}"></p>
+
+          </div>
+          <div id="comments" class="comments anchor">
+            <div class="comments-header">
+              <h5><i class="fa fa-comment-o"></i> Comments (<span th:text="${record_video.video_comment_num}"></span>)</h5>
+              <div class="dropdown float-right">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Sorted by best <span class="caret"></span></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="/404">Best</a>
+                  <a class="dropdown-item" href="/404">Latest</a>
+                  <a class="dropdown-item" href="/404">Oldest</a>
+                  <a class="dropdown-item" href="/404">Random</a>
+                </div>
+              </div>
+            </div>
+            <a class="btn btn-primary text-left m-t-15 btn-block" href="#comments" role="button"><i class="fa fa-spinner fa-pulse m-r-5"></i> Load more 4 comments</a>
+            <ul>
+              <li>
+                <div class="comment">
+                  <div class="comment-avatar">
+                    <a href="/profilepage"><img src="/img/user/user-1.jpg" alt=""></a>
+                    <a class="badge badge-primary" href="/profilepage" data-toggle="tooltip" data-placement="bottom" title="Add as friend"><i class="fa fa-user-plus"></i></a>
+                  </div>
+                  <div class="comment-post">
+                    <div class="comment-header">
+                      <div class="comment-author">
+                        <h5><a href="/profilepage">Venom</a></h5>
+                        <span>Member</span>
+                      </div>
+                      <div class="comment-action">
+                        <div class="dropdown float-right">
+                          <a href="/404" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
+                          <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="/404">Moderate</a>
+                            <a class="dropdown-item" href="/404">Embed</a>
+                            <a class="dropdown-item" href="/404">Report</a>
+                            <a class="dropdown-item" href="/404">Mark as spam</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p>Awesome these are news we were looking for, thanks DICE best thing i've heard today, but more game modes are welcome.</p>
+                    <div class="comment-footer">
+                      <ul>
+                        <li><a href="/404"><i class="fa fa-heart-o"></i> Like</a></li>
+                        <li><a href="/404"><i class="icon-reply"></i> Reply</a></li>
+                        <li><a href="/404"><i class="fa fa-clock-o"></i> 3 hours ago</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <ul>
+                  <li>
+                    <div class="comment">
+                      <div class="comment-avatar"><img src="/img/user/user-2.jpg" alt=""></div>
+                      <div class="comment-post">
+                        <div class="comment-header">
+                          <div class="comment-author">
+                            <h5><a href="/profilepage">Elizabeth</a></h5>
+                            <span>Member</span>
+                          </div>
+                          <div class="comment-action">
+                            <div class="dropdown float-right">
+                              <a href="/404" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="/404">Moderate</a>
+                                <a class="dropdown-item" href="/404">Embed</a>
+                                <a class="dropdown-item" href="/404">Report</a>
+                                <a class="dropdown-item" href="/404">Mark as spam</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <p>Please also consider replacing Battles with Blast (in Skirmish): it can use the same AI and would be much more fun (tokens are annoying and maps are limited)!</p>
+                        <div class="comment-footer">
+                          <ul>
+                            <li><a href="/404"><i class="fa fa-heart-o"></i> Like</a></li>
+                            <li><a href="/404"><i class="icon-reply"></i> Reply</a></li>
+                            <li><a href="/404"><i class="fa fa-clock-o"></i> 24 minutes ago</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="comment">
+                  <div class="comment-avatar"><a href="/profilepage"><img src="/img/user/user-3.jpg" alt=""></a></div>
+                  <div class="comment-post">
+                    <div class="comment-header">
+                      <div class="comment-author">
+                        <h5>
+                          <a href="/profilepage">Clark</a>
+                          <span class="badge badge-outline-primary">Admin</span>
+                        </h5>
+                      </div>
+                      <div class="comment-action">
+                        <div class="comment-action">
+                          <div class="dropdown float-right">
+                            <a href="/404" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                              <a class="dropdown-item" href="/404">Moderate</a>
+                              <a class="dropdown-item" href="/404">Embed</a>
+                              <a class="dropdown-item" href="/404">Report</a>
+                              <a class="dropdown-item" href="/404">Mark as spam</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p>Thank you this news and I can't wait for offline content to drop next week.</p>
+                    <div class="comment-footer">
+                      <ul>
+                        <li><a href="/404"><i class="fa fa-heart-o"></i> Like</a></li>
+                        <li><a href="/404"><i class="icon-reply"></i> Reply</a></li>
+                        <li><a href="/404"><i class="fa fa-clock-o"></i> June 16, 2017 8:13 pm</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="comment">
+                  <div class="comment-avatar"><a href="/profilepage"><img src="img/user/user-4.jpg" alt=""></a></div>
+                  <div class="comment-post">
+                    <div class="comment-header">
+                      <div class="comment-author">
+                        <h5><a href="/profilepage">Strange</a></h5>
+                        <span>Member</span>
+                      </div>
+                      <div class="comment-action">
+                        <div class="comment-action">
+                          <div class="dropdown float-right">
+                            <a href="/404" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                              <a class="dropdown-item" href="/404">Moderate</a>
+                              <a class="dropdown-item" href="/404">Embed</a>
+                              <a class="dropdown-item" href="/404">Report</a>
+                              <a class="dropdown-item" href="/404">Mark as spam</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p>To all those reading who have not yet bought this game yet, and are a fan of Star Wars - Don't listen to the nay-sayers on these forums, this game is simply amazing!</p>
+                    <div class="comment-footer">
+                      <ul>
+                        <li><a href="/404"><i class="fa fa-heart-o"></i> Like</a></li>
+                        <li><a href="/404"><i class="icon-reply"></i> Reply</a></li>
+                        <li><a href="/404"><i class="fa fa-clock-o"></i> June 11, 2017 14:26 am</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <form>
+              <h5>Leave a comment</h5>
+              <div class="form-group">
+                <textarea class="form-control" rows="5" placeholder="Your Comment"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-shadow">Submit Comment</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="sidebar">
+            <!-- widget post  -->
+            <div class="widget widget-videos">
+              <h5 class="widget-title">Recommends</h5>
+              <ul class="widget-list">
+                <li th:each="rc_video : ${rc_record_video}">
+                  <div class="widget-img" style="margin-bottom: 5px">
+                    <a th:href="@{'/videos/watch?cid=' + ${rc_video.video_cid}}"><img th:src="@{${rc_video.video_cover_address}}" alt=""></a>
+                    <span>2:13</span>
+                    <span id="video-newspan" th:inline="text">[[${record_video.video_access_num}]] Views</span></span>
+                  </div>
+                  <h4><a th:href="@{'/videos/watch?cid=' + ${rc_video.video_cid}}"><span th:text="${rc_video.video_title}" id="video-title-hidden"></span></a></h4>
+                </li>
+              </ul>
+            </div>
+            <!-- /widget post -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /main -->
+
+  <!-- footer -->
+  <footer id="footer">
+    <div th:replace="footer::footer"></div>
+  </footer>
+  <!-- /footer -->
+
+  <!-- vendor js -->
+  <script src="/plugins/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/plugins/popper/popper.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- plugins js -->
+  <script src="/plugins/lightbox/lightbox.js"></script>
+  <script src="/plugins/owl-carousel/js/owl.carousel.min.js"></script>
+  <script>
+    (function($) {
+      "use strict";
+
+
+      $('.owl-slide').owlCarousel({
+        nav: true,
+        loop: true,
+        autoplay: true,
+        items: 1
+      });
+
+
+      $('.owl-list').owlCarousel({
+        margin: 25,
+        nav: true,
+        dots: false,
+        responsive: {
+          0: {
+            items: 1
+          },
+          500: {
+            items: 2
+          },
+          701: {
+            items: 3
+          },
+          1000: {
+            items: 4
+          }
+        }
+      });
+
+
+      $('[data-lightbox]').lightbox();
+    })(jQuery);
+  </script>
+  <!-- theme js -->
+  <script src="/js/theme.min.js"></script>
+  <!--header登录状态控制-->
+  <script th:inline="javascript">
+    var logstate = [[${logstate}]];
+    if(logstate==1){
+      document.getElementById("no").style.display="none";
+      document.getElementById("yes").style.display="";
+    }else{
+      document.getElementById("yes").style.display="none";
+    }
+  </script>
+  <!--video player-->
+  <script th:inline="javascript">
+    var config = window.playerConfig;
+    var video_preview = [[${record_video.video_cover_address}]]
+    config.plugins = [
+      typeof MuiPlayerDesktopPlugin == 'function' ? new MuiPlayerDesktopPlugin({
+        thumbnails:{ // 缩略图配置
+          preview:[video_preview],
+          tile:[10,10],
+          scale:[160,90],
+        },
+      }) : {},
+    ]
+
+    console.log(config);
+    var mp = new MuiPlayer(config);
+  </script>
+  <!--点赞和点踩功能-->
+  <script th:inline="javascript">
+    var logstate = [[${logstate}]];
+    var video_cid = [[${record_video.video_cid}]];
+    var like_info = [[${like_info}]];
+    // 判断是否有用户对应该视频点赞记录
+    if(like_info!=null){
+      $("#a_like").removeAttr("href");
+      $("#a_like").removeAttr("onclick");
+      $("#a_dislike").removeAttr("href");
+      $("#a_dislike").removeAttr("onclick");
+      if(like_info.like_state==1){
+        $("#a_like i").removeClass("iconfont icon-zan1");
+        $("#a_like i").addClass("iconfont icon-zan");
+        $("#a_like i").css("color","#e91916")
+      }else{
+        $("#a_dislike i").removeClass("iconfont icon-cai1");
+        $("#a_dislike i").addClass("iconfont icon-cai");
+        $("#a_dislike i").css("color","#e91916");
+      }
+    }
+     // $(document).ready(function(){
+      function like(){
+        // 用户已经登录
+        if (logstate == 1) {
+          $.ajax({
+            type: "post",
+            url: "/videos/watch",
+            data: {
+              "video_cid": video_cid,
+              "like_state": 1,
+              "operation": "likeORnot"
+            },
+            async: true,
+            success: function (data) {
+              console.log(data);//在控制台输出信息。
+            }
+          });
+          $("#like").text([[${record_video.video_like_num}]]+1);
+          $("#a_like").removeAttr("href");
+          $("#a_like").removeAttr("onclick");
+          $("#a_dislike").removeAttr("href");
+          $("#a_dislike").removeAttr("onclick");
+          $("#a_like i").removeClass("iconfont icon-zan1");
+          $("#a_like i").addClass("iconfont icon-zan");
+          $("#a_like i").css("color", "#e91916");
+        } else {
+          window.location.href = "/login?backto=%2Fvideos%2Fwatch%3Fcid%3D" + video_cid;
+        }
+      };
+      function dislike(){
+        if(logstate==1){
+          $.ajax({
+            type:"post",
+            url:"/videos/watch",
+            data:{
+              "video_cid":video_cid,
+              "like_state":0,
+              "operation":"likeORnot"
+            },
+            async:true,
+            success:function(data){
+              console.log(data);//在控制台输出信息。
+            }
+          });
+          $("#dislike").text([[${record_video.video_dislike_num}]]+1);
+          $("#a_like").removeAttr("href");
+          $("#a_like").removeAttr("onclick");
+          $("#a_dislike").removeAttr("href");
+          $("#a_dislike").removeAttr("onclick");
+          $("#a_dislike i").removeClass("iconfont icon-cai1");
+          $("#a_dislike i").addClass("iconfont icon-cai");
+          $("#a_dislike i").css("color","#e91916");
+        }else{
+          window.location.href="/login?backto=%2Fvideos%2Fwatch%3Fcid%3D"+video_cid;
+        }
+
+      };
+     // });
+
+  </script>
+  <!--播放量记录-->
+  <script th:inline="javascript">
+    var video_cid = [[${record_video.video_cid}]];
+    $("#mui-player").click(function(){
+      $.ajax({
+        type:"post",
+        url:"/videos/watch",
+        data:{
+          "video_cid":video_cid,
+          "operation":"playcounts"
+        },
+        async:true,
+        success:function(data) {
+          console.log(data);//在控制台输出信息。
+        }
+      });
+    })
+  </script>
+  <!--图片裁剪-->
+  <script src="/js/jqthumb.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      images();
+      $(window).resize(function () {
+        images();
+      })
+    });
+    function images(){
+      var img_width = $(".widget-img").width();
+      var img_height = img_width*0.5625;
+      $('.widget-img a img').jqthumb({
+        classname : 'jqthumb',
+        width : img_width,
+        height : img_height,
+        zoom : '1',   //缩放比例
+        showoncomplete : true
+      });
+    }
+  </script>
+
+</body>
+</html>

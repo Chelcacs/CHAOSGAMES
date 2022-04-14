@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="05717ab0-8c8c-483f-9d27-c2ffd60687b8" name="HUAWEI" url="http://121.36.254.33">
+        <fileTransfer rootFolder="/root" accessType="SFTP" host="121.36.254.33" port="22" sshConfigId="321a26f6-30f8-4d00-affe-b2cba17f965f" sshConfig="root@121.36.254.33:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
